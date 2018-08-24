@@ -368,7 +368,18 @@ bool Image::initWithImageFile(const std::string& path)
 
     if (!data.isNull())
     {
-        ret = initWithImageData(data.getBytes(), data.getSize());
+        // 图片文件解密
+        if (ext::AnalyzeExtension(path)[1] == ext::TARGET_EXTENSION)
+        {
+            auto image_data = ext::DecryptImage(path, data);
+            ret = initWithImageData(&image_data[0], image_data.size());
+            CCLOG("DecryptImage --->: %s", path..c_str());
+        }
+        else
+        {
+            ret = initWithImageData(data.getBytes(), data.getSize());
+            CCLOG("NormalImage ---");
+        }
     }
 
     return ret;

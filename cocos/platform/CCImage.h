@@ -30,6 +30,8 @@ THE SOFTWARE.
 #include "base/CCRef.h"
 #include "renderer/CCTexture2D.h"
 
+#include "ext/CCDecryptImage.h"
+
 // premultiply alpha, or the effect will wrong when want to use other pixel format in Texture2D,
 // such as RGB888, RGB5A1
 #define CC_RGB_PREMULTIPLY_ALPHA(vr, vg, vb, va) \

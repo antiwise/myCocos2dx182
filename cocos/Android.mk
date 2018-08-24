@@ -89,6 +89,8 @@ platform/CCGLView.cpp \
 platform/CCImage.cpp \
 platform/CCSAXParser.cpp \
 platform/CCThread.cpp \
+ext/CCAES.cpp \
+ext/CCDecryptImage.cpp \
 $(MATHNEONFILE) \
 math/CCAffineTransform.cpp \
 math/CCGeometry.cpp \
