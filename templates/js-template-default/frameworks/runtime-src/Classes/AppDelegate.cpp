@@ -14,6 +14,11 @@
 using namespace anysdk::framework;
 #endif
 
+// bugly
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "bugly/CrashReport.h"
+#endif
+
 USING_NS_CC;
 
 AppDelegate::AppDelegate()
@@ -37,6 +42,13 @@ void AppDelegate::initGLContextAttrs()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
+    // bugly: 初始化bugly， xxxxxx是你的APPID
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    CrashReport::initCrashReport("0893e3f215", false);
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    CrashReport::initCrashReport("a45496884a", false);
+#endif
+
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS && PACKAGE_AS
     SDKManager::getInstance()->loadAllPlugins();
 #endif
@@ -70,7 +82,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     se->setExceptionCallback([](const char* location, const char* message, const char* stack){
         // Send exception information to server like Tencent Bugly.
-
+        CrashReport::reportException(CATEGORY_JS_EXCEPTION,  "JSException", message, stack);
     });
 
     jsb_register_all_modules();
@@ -81,7 +93,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 #endif
 
     se->start();
-
+    
     jsb_run_script("main.js");
 
     return true;
