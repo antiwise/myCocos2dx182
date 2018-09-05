@@ -1,0 +1,40 @@
+android
+在“AndroidManifest.xml”的“Application”中增加“meta-data”配置项：
+
+<application
+    <!-- 配置APP ID -->
+    <meta-data
+            android:name="BUGLY_APPID"
+            android:value="<APP_ID>" />
+    <!-- 配置APP版本号 -->
+    <meta-data
+            android:name="BUGLY_APP_VERSION"
+            android:value="<APP_Version>" />
+    <!-- 配置APP渠道号 -->
+    <meta-data
+            android:name="BUGLY_APP_CHANNEL"
+            android:value="<APP_Channel>" />
+    <!-- 配置Bugly调试模式（true或者false）-->
+    <meta-data
+            android:name="BUGLY_ENABLE_DEBUG"
+            android:value="<isDebug>" />
+</application>
+不同于“android:versionName”，“BUGLY_APP_VERSION”配置的是Bugly平台的APP版本号。
+
+通过“AndroidManifest.xml”配置后的初始化方法如下：
+
+CrashReport.initCrashReport(getApplicationContext());
+Bugly默认从“AndroidManifest.xml”文件中读取“VersionName”作为版本号，自定义设置请使用参考“高级设置”。
+
+
+
+
+ios
+初始化Bugly
+在工程AppDelegate.m的application:didFinishLaunchingWithOptions:方法中初始化：
+
+Objective-C
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Bugly startWithAppId:@"此处替换为你的AppId"];
+    return YES;
+}

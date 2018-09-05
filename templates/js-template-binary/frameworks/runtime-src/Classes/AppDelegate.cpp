@@ -43,11 +43,11 @@ void AppDelegate::initGLContextAttrs()
 bool AppDelegate::applicationDidFinishLaunching()
 {
     // bugly: 初始化bugly， xxxxxx是你的APPID，这个不用多说了吧
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    CrashReport::initCrashReport("0893e3f215", false);
-#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    CrashReport::initCrashReport("a45496884a", false);
-#endif
+//#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+//    CrashReport::initCrashReport("0893e3f215", false);
+//#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+//    CrashReport::initCrashReport("a45496884a", false);
+//#endif
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS && PACKAGE_AS
     SDKManager::getInstance()->loadAllPlugins();
